@@ -8,6 +8,9 @@ The goal of Phase 1 is to design and implement a reproducible data pipeline cove
 
 **ML Problem:** Given a customer's purchase history and article metadata, predict which articles a customer is most likely to purchase next. Basically, we built the thing that makes you buy things you didn't know you needed.
 
+<img width="455" height="290" alt="e8df23cc-9bfe-4776-ae54-22d67d47f15a-6442-000008859e923c5f" src="https://github.com/user-attachments/assets/8a0b99c6-6b53-486f-8099-ca0b9d76a253" />
+
+“us starting this project not knowing what’s going on”
 ---
 
 ## Team
@@ -117,6 +120,10 @@ The ETL pipeline reads from the landing zone, applies all transformations, and w
 
 All transformations are reproducible — the pipeline reads from immutable landing files and overwrites only the clean zone. No raw data was hurt in this process.
 
+![images](https://github.com/user-attachments/assets/1116d5ef-f8e3-476a-9c38-ef1b83bb174d)
+R² vs 31 million rows
+absolute chaos
+
 ---
 
 ## II.3 Cataloging and Governance
@@ -183,6 +190,9 @@ EDA was conducted on the curated feature tables to assess data readiness. We loo
 ### Data Readiness Conclusion
 
 The dataset is clean, well-structured, and ready for recommendation model training. All critical modeling fields were validated, with minimal missing values remaining only in non-critical attributes such as customer age. Skewness in customer activity is expected and will be handled at the modeling stage. In short: the data is ready, and so are we.
+
+![flat,750x,075,f-pad,750x1000,f8f8f8 u2](https://github.com/user-attachments/assets/4fb63b4e-2ab0-443f-b074-998429a72aa5)
+“wait… WE actually understand the data now???”
 
 ---
 
@@ -265,6 +275,8 @@ All engineered features are retained for Phase 1. No features were dropped becau
 
 **Window functions without partitions** — Spark warned us about unpartitioned window operations during popularity ranking. We acknowledged the warning, documented it, and moved on like the deadline-aware engineers we are.
 
+![a91c4f62a99f8bb4bee45272f035bb6d](https://github.com/user-attachments/assets/e39f4a53-8d46-42d7-afcb-a8c08a83de37)
+
 ---
 
 ## How to Run
@@ -279,3 +291,5 @@ Run the notebooks in this exact order. Skipping steps will cause errors and emot
 ```
 
 All notebooks are also configured as a Databricks job (`Job ID: 501428519265434`) with sequential task dependencies. Total pipeline runtime: ~12 minutes — enough time to make a coffee and pretend you understood everything from the start.
+
+![ee8df674-9b93-4d52-8268-d87c96ea1f99_text](https://github.com/user-attachments/assets/fbb07823-d770-4482-b815-422611b5afb3)
