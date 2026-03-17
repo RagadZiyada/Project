@@ -10,6 +10,7 @@ The goal of Phase 1 is to design and implement a reproducible data pipeline cove
 
 <img width="455" height="290" alt="e8df23cc-9bfe-4776-ae54-22d67d47f15a-6442-000008859e923c5f" src="https://github.com/user-attachments/assets/8a0b99c6-6b53-486f-8099-ca0b9d76a253" />
 (us starting this project not knowing what’s going on)
+
 ---
 
 ## Team
@@ -290,5 +291,7 @@ Run the notebooks in this exact order. Skipping steps will cause errors and emot
 ```
 
 All notebooks are also configured as a Databricks job (`Job ID: 501428519265434`) with sequential task dependencies. Total pipeline runtime: ~12 minutes — enough time to make a coffee and pretend you understood everything from the start.
+
+---
 
 ![ee8df674-9b93-4d52-8268-d87c96ea1f99_text](https://github.com/user-attachments/assets/fbb07823-d770-4482-b815-422611b5afb3)
