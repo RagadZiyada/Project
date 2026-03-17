@@ -10,7 +10,7 @@ The goal of Phase 1 is to design and implement a reproducible data pipeline cove
 
 <img width="455" height="290" alt="e8df23cc-9bfe-4776-ae54-22d67d47f15a-6442-000008859e923c5f" src="https://github.com/user-attachments/assets/8a0b99c6-6b53-486f-8099-ca0b9d76a253" />
 
-“us starting this project not knowing what’s going on”
+###“us starting this project not knowing what’s going on”
 ---
 
 ## Team
