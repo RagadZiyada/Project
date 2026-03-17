@@ -10,6 +10,15 @@ The goal of Phase 1 is to design and implement a reproducible data pipeline cove
 
 ---
 
+## Team
+
+| Member | ID | Contributions |
+|--------|----|--------------|
+| Ragad Ziyada | 60301042 | Azure infrastructure setup, ADLS storage zone design, ADF ingestion pipeline configuration, notebook 01 (load & validate), notebook 02 (ETL & cleaning), data quality report |
+| Rawand Elraba | 60304948 | Notebook 03 (feature engineering), notebook 04 (EDA), data catalog documentation, schema dictionary, lineage mapping, assumptions file |
+
+---
+
 ## Repository Structure
 
 ```
@@ -47,14 +56,15 @@ The pipeline runs entirely on Azure using the following services. We would have 
 | `processed-p1` | Landing + Clean | Parquet landing files + cleaned datasets |
 | `curated-p1` | Curated | Feature tables ready for modeling |
 
+Three zones, three containers, zero excuses for losing data.
+
 ---
 
 ## II.1 Data Ingestion
 
-**Source:** Kaggle — H&M Personalized Fashion Recommendations
-**Ingestion mode:** Batch
-##Batch ingestion was chosen because the dataset is historical and static, making real-time streaming unnecessary.
-**Format:** CSV → Parquet (via Azure Data Factory pipeline `pl_hm_raw_to_processed`)
+**Source:** Kaggle — H&M Personalized Fashion Recommendations  
+**Ingestion mode:** Batch — the dataset is historical and static, so real-time streaming would have been overkill and slightly dramatic  
+**Format:** CSV → Parquet (via Azure Data Factory pipeline `pl_hm_raw_to_processed`)  
 **Refresh strategy:** One-time historical load (dataset covers 2018-09-20 to 2020-09-22)
 
 ### Raw Datasets
@@ -67,8 +77,8 @@ The pipeline runs entirely on Azure using the following services. We would have 
 
 Raw CSV files are preserved in the `raw-p1` container and never overwritten. The ADF pipeline converts them to Parquet in `processed-p1/[dataset]_landing/` before any transformation is applied. We preserve the raw data the same way you preserve your notes before an exam — untouched and just in case.
 
-**Notebook:** `databricks/01_load_validate_data.ipynb`
-This notebook loads from the landing zone and runs initial validation: row counts, schema inspection, null reports per column, duplicate checks, required column checks, and invalid value checks (null dates, null prices, price ≤ 0). It's basically the data equivalent of checking your groceries before leaving the store.
+**Notebook:** `databricks/01_load_validate_data.ipynb`  
+This notebook loads from the landing zone and runs initial validation: row counts, schema inspection, null reports per column, duplicate checks, required column checks, and invalid value checks (null dates, null prices, price ≤ 0). It's basically the data equivalent of checking your groceries before leaving the store — except the store has 31 million items.
 
 ---
 
@@ -76,9 +86,7 @@ This notebook loads from the landing zone and runs initial validation: row count
 
 **Notebook:** `databricks/02_clean_transactions.ipynb`
 
-The ETL pipeline reads from the landing zone, applies all transformations, and writes clean Parquet files back to `processed-p1/[dataset]_clean/`. We removed nearly 3 million bad rows — turns out not all data is created equal.
-
-All transformations are deterministic and reproducible, as the pipeline reads from immutable landing data and produces consistent outputs on each run.
+The ETL pipeline reads from the landing zone, applies all transformations, and writes clean Parquet files back to `processed-p1/[dataset]_clean/`. We removed nearly 3 million bad rows — turns out not all data is created equal, and some data really shouldn't have been invited in the first place.
 
 ### Transformations Applied
 
@@ -113,7 +121,7 @@ All transformations are reproducible — the pipeline reads from immutable landi
 
 ## II.3 Cataloging and Governance
 
-Full schema definitions, data types, lineage, and assumptions are documented in the `catalog/` folder. Because undocumented data is just data with trust issues.
+Full schema definitions, data types, lineage, and assumptions are documented in the `catalog/` folder. Because undocumented data is just data with trust issues — and we've had enough trust issues with 3 million duplicate rows already.
 
 - **`data_catalog.md`** — storage zones, dataset registry, row counts
 - **`schema_dictionary.md`** — field-level definitions with data types and examples for all datasets including curated feature tables
@@ -151,7 +159,7 @@ EDA was conducted on the curated feature tables to assess data readiness. We loo
 | Analysis | Finding |
 |----------|---------|
 | Transactions over time | Peak activity in late 2019 — steady coverage across 2018–2020 |
-| Sales channel split | Channel 2 (online) dominates transactions |
+| Sales channel split | Channel 2 (online) dominates — people really don't want to go to the store |
 | Top department | Jersey Basic, Ladieswear categories lead in volume |
 | Customer purchase count | Highly skewed — median is low, max is very high (power-law distribution) |
 | Price distribution | Normalized values, right-skewed with a long tail |
@@ -170,11 +178,11 @@ EDA was conducted on the curated feature tables to assess data readiness. We loo
 
 1. Customer spend and purchase activity are skewed by a small number of highly active customers — the data has its own influencers
 2. A few articles dominate sales — popularity-based features may be imbalanced
-3. ~1.1% of customers have missing age — kept as null rather than imputed to avoid introducing bias
+3. ~1.1% of customers have missing age — kept as null rather than imputed to avoid introducing bias. We'd rather have honest nulls than confident lies.
 
 ### Data Readiness Conclusion
 
-The dataset is clean, well-structured, and ready for recommendation model training. All critical fields have no nulls. Skewness in customer activity is expected and will be handled at the modeling stage. In short: the data is ready, and so are we.
+The dataset is clean, well-structured, and ready for recommendation model training. All critical modeling fields were validated, with minimal missing values remaining only in non-critical attributes such as customer age. Skewness in customer activity is expected and will be handled at the modeling stage. In short: the data is ready, and so are we.
 
 ---
 
@@ -209,7 +217,7 @@ Features are engineered from the cleaned datasets and written to `curated-p1`. T
 | `article_total_sales` | Absolute popularity |
 | `article_unique_customers` | Reach across customer base |
 | `article_avg_price` | Price point of the article |
-| `article_last_sold_date` | Recency of item activity |
+| `article_last_sold_date` | Recency of item activity — is this item still relevant or just taking up storage? |
 | `article_sales_last_7d` | Short-term trending signal |
 | `article_sales_last_30d` | Medium-term trending signal |
 | `article_popularity_rank` | Global rank by total sales |
@@ -232,8 +240,6 @@ Features are engineered from the cleaned datasets and written to `curated-p1`. T
 
 All engineered features are retained for Phase 1. No features were dropped because all have direct relevance to the recommendation hypothesis and no redundant features were identified at this stage. Feature importance ranking and dimensionality reduction will be applied in Phase 2 during model training — we'll Marie Kondo the features later.
 
-Feature selection was limited at this stage to retain all potentially informative variables, as model-based selection techniques will be applied in Phase 2.
-
 ### Output Datasets
 
 | Dataset | Rows | Description |
@@ -242,6 +248,22 @@ Feature selection was limited at this stage to retain all potentially informativ
 | `article_features` | 104,547 | One row per article with all article-level features |
 | `customer_article_interactions` | 28,813,419 | Full interaction table joining all three datasets |
 | `recommendation_dataset` | 28,813,419 | Final modeling dataset with all features joined |
+
+---
+
+## Challenges and Design Decisions
+
+**Handling 31 million rows without crying** — processing 3.25 GB of transaction data required running everything on Azure Databricks with Spark. A local machine was considered and immediately rejected.
+
+**Duplicate transactions** — nearly 3 million rows were duplicates. We removed them. They will not be missed.
+
+**Missing customer demographics** — ~65% of customers had no FN/Active flag recorded. Rather than dropping these customers entirely (which would gut the dataset), we filled nulls with 0 and documented the assumption. Losing 65% of your customers before even training a model felt like a bad start.
+
+**Normalized prices** — the price column contains normalized values rather than real currency amounts. We kept them as-is since the relative values still capture price sensitivity, and reverse-engineering the original currency felt like a problem for someone else.
+
+**Feature selection deferred to Phase 2** — we engineered 31 features and kept all of them. Dropping features without a model to evaluate importance felt like throwing away ingredients before tasting the food.
+
+**Window functions without partitions** — Spark warned us about unpartitioned window operations during popularity ranking. We acknowledged the warning, documented it, and moved on like the deadline-aware engineers we are.
 
 ---
 
