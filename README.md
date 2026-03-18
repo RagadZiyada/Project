@@ -293,5 +293,20 @@ Run the notebooks in this exact order. Skipping steps will cause errors and emot
 All notebooks are also configured as a Databricks job (`Job ID: 501428519265434`) with sequential task dependencies. Total pipeline runtime: ~12 minutes — enough time to make a coffee and pretend you understood everything from the start.
 
 ---
+## Screenshots
+
+<img width="624" height="228" alt="image" src="https://github.com/user-attachments/assets/c3f47363-4c10-4722-916e-a9bf8aed64b4" />
+<img width="624" height="245" alt="image" src="https://github.com/user-attachments/assets/ecb16b46-a6f0-4baa-aa88-6b03f27e4ab5" />
+<img width="624" height="257" alt="image" src="https://github.com/user-attachments/assets/be6c87f9-0e76-4d0f-965b-8260366ca203" />
+<img width="624" height="198" alt="image" src="https://github.com/user-attachments/assets/2367f1c0-c072-42b3-a897-591f5499a98b" />
+<img width="624" height="209" alt="image" src="https://github.com/user-attachments/assets/6d25cf97-6c30-4824-85bd-e02876aad049" />
+<img width="624" height="179" alt="image" src="https://github.com/user-attachments/assets/1014e5e8-ca90-4030-9236-a6f4bdd090e2" />
+<img width="624" height="212" alt="image" src="https://github.com/user-attachments/assets/1872cbd6-bdb4-42ad-9c90-b856aa25bf4f" />
+<img width="624" height="215" alt="image" src="https://github.com/user-attachments/assets/1dc580c2-7dae-47ab-af12-e90637198882" />
+<img width="624" height="206" alt="image" src="https://github.com/user-attachments/assets/252098c7-3179-479e-9763-d89a60792730" />
+<img width="624" height="206" alt="image" src="https://github.com/user-attachments/assets/eea69d2a-9bd7-4dcd-a609-d5e2c0d9ee4b" />
+<img width="624" height="301" alt="image" src="https://github.com/user-attachments/assets/31255cc5-4424-48f7-bccc-2d44efb9c30a" />
+
+---
 
 ![ee8df674-9b93-4d52-8268-d87c96ea1f99_text](https://github.com/user-attachments/assets/fbb07823-d770-4482-b815-422611b5afb3)
