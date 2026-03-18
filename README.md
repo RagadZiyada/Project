@@ -1,9 +1,4 @@
 # DSAI3202 – Project Phase 1: Data Pipeline, ETL, and Feature Foundations
-Students:
-
-Ragad Ziyada — 60301042
-
-Rawand Elraba — 60304948
 
 ## Project Overview
 
