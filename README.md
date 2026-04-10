@@ -14,7 +14,7 @@ Us:
 
 <img width="455" alt="confused" src="https://github.com/user-attachments/assets/8a0b99c6-6b53-486f-8099-ca0b9d76a253" />
 
-This project builds a recommendation system that tells customers what to buy. Basically, we're teaching a computer to have better fashion taste than us. The bar was low.
+This project builds a recommendation system that tells customers what to buy. Think of it as teaching a computer to have better fashion taste than your average university student.
 
 **Dataset:** [H&M Personalized Fashion Recommendations](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations) from Kaggle
 
