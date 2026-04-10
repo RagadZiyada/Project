@@ -145,7 +145,7 @@ Those 3 million rows will not be missed. They knew what they did.
 **Transformations:**
 - Removed duplicates (there were... so many)
 - Fixed ages outside 12-100 (15,861 people lying about their age)
-- Normalized text (`"regularly."` → `"regularly"`)
+- Normalized text (`"regularly."` → `"regularly"` cuz consistency matters more than punctuation)
 - Removed null/zero prices (free clothes? in THIS economy?)
 - Added temporal features: year, month, week, day_of_week
 
