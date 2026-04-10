@@ -405,8 +405,8 @@ def get_recommendations(customer_id):
 **Sample API Response:**
 ```json
 {
-  "customer_id": "abc123...",
-  "department": "Swimwear",
+  "customer_id": "O.D stands for Over Dosed",
+  "department": "Drugs",
   "recommendations": ["0351484002", "0688537004", ...],
   "prediction_date": "2026-04-10",
   "model_version": "v1"
