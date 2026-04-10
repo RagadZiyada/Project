@@ -9,9 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  databricksWorkspaceUrl: 'https://adb-7405619486129038.18.azuredatabricks.net'
-
 stages:
   - stage: Validate
     displayName: 'Validate Notebooks'
@@ -25,6 +22,7 @@ stages:
             displayName: 'Setup Python 3.9'
 
           - script: |
+              python -m pip install --upgrade pip
               pip install nbformat
             displayName: 'Install dependencies'
 
@@ -34,24 +32,28 @@ stages:
               import nbformat
               import glob
               import sys
-              
+
               notebooks = glob.glob('notebooks/**/*.ipynb', recursive=True)
               errors = []
-              
+
+              if not notebooks:
+                  print('No notebook files found.')
+                  sys.exit(1)
+
               for nb_path in notebooks:
                   try:
                       with open(nb_path, 'r', encoding='utf-8') as f:
-                          nb = nbformat.read(f, as_version=4)
-                      print(f' {nb_path} - Valid')
+                          nbformat.read(f, as_version=4)
+                      print(f'{nb_path} - Valid')
                   except Exception as e:
-                      print(f' {nb_path} - Error: {e}')
+                      print(f'{nb_path} - Error: {e}')
                       errors.append(nb_path)
-              
+
               if errors:
-                  print(f'\n {len(errors)} notebook(s) failed validation')
+                  print(f'\n{len(errors)} notebook(s) failed validation')
                   sys.exit(1)
               else:
-                  print(f'\n All {len(notebooks)} notebooks validated successfully')
+                  print(f'\nAll {len(notebooks)} notebooks validated successfully')
               "
             displayName: 'Validate notebook JSON format'
 
@@ -82,9 +84,8 @@ stages:
               echo ""
               echo "Team: 60304248"
               echo "Project: DSAI3202 Cloud Computing Phase 2"
-              echo "Databricks: $(databricksWorkspaceUrl)"
               echo ""
-              echo "Pipeline Status: SUCCESS"
+              echo "Validation completed successfully"
               echo ""
               echo "Notebooks Validated:"
               echo "  - notebooks/phase1/ (Data Engineering)"
