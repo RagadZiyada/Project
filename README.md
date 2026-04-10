@@ -27,7 +27,6 @@ This project builds a recommendation system that tells customers what to buy. Th
 
 ```
 ├── notebooks/
-│   ├── notebooks/
 │       ├── phase1
 │           ├── 01_load_validate_data.ipynb    # Load & validate (Phase 1)
 │           ├── 02_clean_transactions.ipynb    # ETL & cleaning (Phase 1)
