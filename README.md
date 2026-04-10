@@ -26,16 +26,19 @@ This project builds a recommendation system that tells customers what to buy. Th
 ### Project Structure
 
 ```
-├── databricks/
-│   ├── 01_load_validate_data.ipynb    # Load & validate (Phase 1)
-│   ├── 02_clean_transactions.ipynb    # ETL & cleaning (Phase 1)
-│   ├── 03_feature_engineering.ipynb   # 31 features (Phase 1)
-│   ├── 04_eda.ipynb                   # Exploratory analysis (Phase 1)
-│   ├── 05_model_baseline.ipynb        # Popularity baseline (Phase 2)
-│   ├── 06_model_personalized.ipynb    # Personalized model (Phase 2)
-│   ├── 07_model_registration.ipynb    # MLflow registration (Phase 2)
-│   ├── 08_deployment.ipynb            # Batch inference (Phase 2)
-│   └── 09_deployment_validation.ipynb # Validation checks (Phase 2)
+├── notebooks/
+│   ├── notebooks/
+│       ├── phase1
+│           ├── 01_load_validate_data.ipynb    # Load & validate (Phase 1)
+│           ├── 02_clean_transactions.ipynb    # ETL & cleaning (Phase 1)
+│           ├── 03_feature_engineering.ipynb   # 31 features (Phase 1)
+│           ├── 04_eda.ipynb                   # Exploratory analysis (Phase 1)
+│       ├── phase2
+│           ├── 05_model_baseline.ipynb        # Popularity baseline (Phase 2)
+│           ├── 06_model_personalized.ipynb    # Personalized model (Phase 2)
+│           ├── 07_model_registration.ipynb    # MLflow registration (Phase 2)
+│           ├── 08_deployment.ipynb            # Batch inference (Phase 2)
+│           └── 09_deployment_validation.ipynb # Validation checks (Phase 2)
 ├── catalog/
 │   ├── data_catalog.md                # Dataset registry
 │   ├── schema_dictionary.md           # Field definitions
