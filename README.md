@@ -173,7 +173,7 @@ Then turned the answer into 31 features.
 | `recency_days` | Days since last purchase |
 | `preferred_department` | Most purchased department |
 | `avg_basket_size` | Items per session |
-| + 6 more | Various signals |
+| View + 6 more | Various signals |
 
 **Article Features (13):**
 | Feature | Why |
@@ -184,7 +184,7 @@ Then turned the answer into 31 features.
 | `sales_last_7d` | Short-term trend |
 | `sales_last_30d` | Medium-term trend |
 | `department_name` | Category |
-| + 7 more | Metadata |
+| View + 7 more | Metadata |
 
 **Interaction Features (4):**
 | Feature | Why |
